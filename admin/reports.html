@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin - Daily Report</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <h2>Admin</h2>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="trips.html">Trips</a>
+        <a href="bookings.html">Bookings</a>
+        <a href="reports.html" style="color:#ffd166;border-left-color:#ffd166">Reports</a>
+        <a href="media.html">Media</a>
+        <a href="posts.html">Posts</a>
+        <a href="settings.html">Settings</a>
+        <a href="login.html" id="logoutBtn">Logout</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <h1>Daily Report</h1>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.5rem">
+        <button id="refreshBtn" class="btn">Refresh Data</button>
+        <button id="sendReportBtn" class="btn">Send Email Report</button>
+      </div>
+
+      <div id="reportSections"></div>
+
+      <h2 style="margin-top:2.5rem">Competitor Price Comparison</h2>
+      <div style="overflow-x:auto">
+        <table id="priceTable" style="width:100%;border-collapse:collapse;background:rgba(255,255,255,0.03);border-radius:12px;overflow:hidden">
+          <thead>
+            <tr style="background:rgba(255,209,102,0.1);color:#ffd166">
+              <th style="padding:1rem;text-align:left">Excursion</th>
+              <th style="padding:1rem;text-align:left">Our Price</th>
+              <th style="padding:1rem;text-align:left">Market Range (€)</th>
+              <th style="padding:1rem;text-align:left">Advice</th>
+            </tr>
+          </thead>
+          <tbody id="priceBody"></tbody>
+        </table>
+      </div>
+      <p style="color:rgba(255,255,255,0.4);font-size:0.8rem;margin-top:0.5rem">
+        Market data sourced from GetYourGuide, Viator, and local Hurghada operators (2025-2026 season).
+      </p>
+    </main>
+  </div>
+  <script type="module" src="js/reports-admin.js"></script>
+  <script type="module" src="js/admin-auth.js"></script>
+</body>
+</html>

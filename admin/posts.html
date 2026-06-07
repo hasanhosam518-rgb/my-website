@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin - Posts</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <h2>Admin</h2>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="trips.html">Trips</a>
+        <a href="bookings.html">Bookings</a>
+        <a href="reports.html">Reports</a>
+        <a href="media.html">Media</a>
+        <a href="posts.html">Posts</a>
+        <a href="settings.html">Settings</a>
+        <a href="login.html" id="logoutBtn">Logout</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <h1>Blog Posts</h1>
+      <form id="postForm">
+        <input id="postTitle" placeholder="Title">
+        <textarea id="postContent" placeholder="Content"></textarea>
+        <button type="submit">Add Post</button>
+      </form>
+      <section id="postsList"></section>
+    </main>
+  </div>
+  <script type="module" src="js/posts-admin.js"></script>
+  <script type="module" src="js/admin-auth.js"></script>
+</body>
+</html>

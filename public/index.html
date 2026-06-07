@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" id="root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Red Sea Excursions Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="Book the best Red Sea excursions in Hurghada. Snorkeling, islands, safaris, water sports and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html" data-i18n="siteTitle">Red Sea Excursions Hub</a>
+      <nav class="main-nav">
+        <a href="trips.html" data-i18n="trips">Trips</a>
+        <a href="blog.html" data-i18n="blog">Blog</a>
+        <a href="contact.html" data-i18n="contact">Contact</a>
+        <a href="admin/login.html" class="admin-link">Admin</a>
+      </nav>
+      <div class="actions">
+        <button id="langBtn">AR</button>
+        <button id="currencyBtn">USD</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <video autoplay muted loop id="bgVideo" playsinline>
+        <source src="assets/videos/reef.mp4" type="video/mp4">
+      </video>
+      <div class="hero-fallback" id="heroFallback" style="display:none"></div>
+      <div class="hero-overlay">
+        <h1>Red Sea Excursions Hub</h1>
+        <p>Best trips and activities in Hurghada, Red Sea</p>
+        <div class="search">
+          <input type="search" id="tripSearch" placeholder="Search trips, islands, activities...">
+          <button id="searchBtn">Search</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="trips" class="section">
+      <div class="container">
+        <h2 data-i18n="featured">Featured Trips</h2>
+        <div id="featuredGrid" class="grid"></div>
+      </div>
+    </section>
+
+    <section class="section stats">
+      <div class="container">
+        <div class="stat">Bookings <span id="statBookings">0</span></div>
+        <div class="stat">Visitors <span id="statVisitors">0</span></div>
+        <div class="stat">Happy Guests <span id="statGuests">0</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">&copy; <span class="year">2024</span> Red Sea Excursions Hub — Hurghada, Egypt</div>
+  </footer>
+
+  <a class="whatsapp-fixed" id="whatsappBtn" href="https://wa.me/201092236166" target="_blank" rel="noopener">WhatsApp</a>
+
+  <script type="module" src="js/main.js"></script>
+  <script>document.querySelector('.year') && (document.querySelector('.year').textContent = new Date().getFullYear());</script>
+  <script>
+    document.getElementById('bgVideo').addEventListener('error', function() {
+      document.getElementById('heroFallback').style.display = 'block';
+    });
+  </script>
+  <script type="module">
+    import { db, doc, getDoc } from './js/firebase-init.js';
+    (async () => {
+      try {
+        const snap = await getDoc(doc(db, 'settings', 'site'));
+        if (snap.exists()) {
+          const s = snap.data();
+          if (s.whatsapp) {
+            document.getElementById('whatsappBtn').href = 'https://wa.me/' + s.whatsapp.replace(/^\+/, '');
+          }
+        }
+      } catch(e) {}
+    })();
+  </script>
+</body>
+</html>

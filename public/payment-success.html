@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" id="root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Booking Confirmed - Red Sea Excursions Hub</title>
+  <meta name="description" content="Your Red Sea excursion booking has been confirmed. Thank you for choosing Red Sea Excursions Hub.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">Red Sea Excursions Hub</a>
+      <nav class="main-nav">
+        <a href="trips.html">Trips</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="admin/login.html" class="admin-link">Admin</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container" style="text-align:center;padding:4rem 1rem">
+    <div style="background:var(--white);border-radius:var(--radius);padding:2.5rem;box-shadow:var(--shadow);max-width:500px;margin:0 auto">
+      <div style="font-size:3rem;margin-bottom:1rem">&#9989;</div>
+      <h1>Booking Confirmed!</h1>
+      <div id="result" style="font-size:1.1rem;color:var(--text-light);margin:1rem 0"></div>
+      <p style="color:var(--muted)">We will contact you shortly with more details.</p>
+      <a href="index.html" class="btn" style="margin-top:1.5rem">Back to Home</a>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <div class="container">&copy; <span class="year">2024</span> Red Sea Excursions Hub — Hurghada, Egypt</div>
+  </footer>
+  <a class="whatsapp-fixed" id="whatsappBtn" href="https://wa.me/201092236166" target="_blank" rel="noopener">WhatsApp</a>
+  <script type="module">
+    const params = new URLSearchParams(location.search);
+    document.getElementById('result').textContent = 'Booking ID: ' + (params.get('id') || 'N/A');
+  </script>
+  <script>document.querySelector('.year') && (document.querySelector('.year').textContent = new Date().getFullYear());</script>
+  <script type="module">
+    import { db, doc, getDoc } from './js/firebase-init.js';
+    (async () => {
+      try {
+        const snap = await getDoc(doc(db, 'settings', 'site'));
+        if (snap.exists() && snap.data().whatsapp)
+          document.getElementById('whatsappBtn').href = 'https://wa.me/' + snap.data().whatsapp.replace(/^\+/, '');
+      } catch(e) {}
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Login - Red Sea Excursions Hub</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <main class="auth-card">
+    <h1>Admin Login</h1>
+    <form id="loginForm">
+      <label>Email</label>
+      <input type="email" id="email" required>
+      <label>Password</label>
+      <input type="password" id="password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p class="note">Local mock credentials: <strong>admin@local</strong> / <strong>any password</strong></p>
+    <p class="note warning" id="serverWarning">Please open this page via a local server (http://127.0.0.1:8000/admin/login.html) and reload after edits.</p>
+  </main>
+  <script>
+    if (location.protocol !== 'http:' && location.protocol !== 'https:') {
+      document.getElementById('serverWarning').textContent = 'Warning: This page should be opened with a local server, not file://. Run "python -m http.server 8000" from the project root folder, then open http://localhost:8000/admin/login.html';
+    } else {
+      document.getElementById('serverWarning').style.display = 'none';
+    }
+  </script>
+  <script type="module" src="js/admin-auth.js"></script>
+</body>
+</html>

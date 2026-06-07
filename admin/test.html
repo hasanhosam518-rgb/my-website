@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Test Page</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    .debug-box {
+      background: #1a1a1a;
+      padding: 1rem;
+      margin: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ffd166;
+      color: #fff;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <h2>Admin Test</h2>
+      <nav>
+        <a href="test.html">Test Page</a>
+        <a href="login.html">Go to Login</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <h1>🧪 Diagnostics Page</h1>
+      
+      <div class="debug-box">
+        <h3>System Check:</h3>
+        <p id="status">Checking...</p>
+      </div>
+
+      <div class="debug-box">
+        <h3>Console Errors:</h3>
+        <p id="errors">No errors logged yet</p>
+      </div>
+
+      <div class="debug-box">
+        <h3>Test Firebase Import:</h3>
+        <button onclick="testImport()" class="btn">Test Import</button>
+        <p id="import-result">Click button to test</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Capture console errors
+    const errors = [];
+    const originalError = console.error;
+    console.error = function(...args) {
+      errors.push(args.join(' '));
+      document.getElementById('errors').innerHTML = `<pre>${errors.join('\n')}</pre>`;
+      originalError.apply(console, args);
+    };
+
+    // Initial checks
+    window.addEventListener('load', () => {
+      const status = document.getElementById('status');
+      status.innerHTML = `
+        ✓ Page loaded successfully<br>
+        ✓ Sidebar CSS works<br>
+        ✓ DOM ready<br>
+        Try the Firebase import test below
+      `;
+    });
+
+    // Test Firebase import
+    async function testImport() {
+      const resultDiv = document.getElementById('import-result');
+      try {
+        resultDiv.innerHTML = 'Testing...';
+        const mod = await import('./js/admin-auth.js');
+        resultDiv.innerHTML = '✓ Firebase module loaded successfully!';
+      } catch (err) {
+        resultDiv.innerHTML = `✗ Error: ${err.message}<br><br><pre>${err.stack}</pre>`;
+      }
+    }
+  </script>
+</body>
+</html>

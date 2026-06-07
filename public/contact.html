@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" id="root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact Us - Red Sea Excursions Hub</title>
+  <meta name="description" content="Get in touch with Red Sea Excursions Hub. Contact us for bookings, inquiries, and travel information.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">Red Sea Excursions Hub</a>
+      <nav class="main-nav">
+        <a href="trips.html">Trips</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="admin/login.html" class="admin-link">Admin</a>
+      </nav>
+      <div class="actions">
+        <button id="langBtn">AR</button>
+        <button id="currencyBtn">USD</button>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <h1>Contact Us</h1>
+    <p style="color:var(--muted);margin-top:-1rem">We'd love to hear from you. Send us a message and we'll get back to you.</p>
+    <form id="contactForm">
+      <label for="name">Name</label>
+      <input id="name" placeholder="Your name" required>
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="your@email.com" required>
+      <label for="message">Message</label>
+      <textarea id="message" rows="5" placeholder="Tell us about your inquiry..." required></textarea>
+      <div class="actions">
+        <button type="submit" class="btn">Send Message</button>
+      </div>
+    </form>
+    <div id="contactStatus" class="status"></div>
+  </main>
+  <footer class="page-footer">
+    <div class="container">&copy; <span class="year">2024</span> Red Sea Excursions Hub — Hurghada, Egypt</div>
+  </footer>
+  <a class="whatsapp-fixed" id="whatsappBtn" href="https://wa.me/201092236166" target="_blank" rel="noopener">WhatsApp</a>
+  <script type="module" src="js/contact.js"></script>
+  <script>document.querySelector('.year') && (document.querySelector('.year').textContent = new Date().getFullYear());</script>
+  <script type="module">
+    import { db, doc, getDoc } from './js/firebase-init.js';
+    (async () => {
+      try {
+        const snap = await getDoc(doc(db, 'settings', 'site'));
+        if (snap.exists() && snap.data().whatsapp)
+          document.getElementById('whatsappBtn').href = 'https://wa.me/' + snap.data().whatsapp.replace(/^\+/, '');
+      } catch(e) {}
+    })();
+  </script>
+</body>
+</html>
