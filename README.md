@@ -10,19 +10,22 @@ Structure:
 
 The project includes a built-in mock mode that works without a real Firebase project (set `useLocalMock: true` in `public/js/firebase-config.js`).
 
-1. **Serve the project root** (not just `public/`):
-   ```bash
-   # Python
-   python -m http.server 8000
-   # Node.js
-   npx http-server -p 8000
-   ```
+### Option 1: Double-click `start.bat` (Windows — easiest)
+Just double-click `start.bat` and open `http://localhost:8000/public/index.html`
 
-2. **Open** `http://localhost:8000/public/index.html` to browse the site
+### Option 2: Node.js
+```bash
+node server.js
+```
 
-3. **Admin login** at `http://localhost:8000/admin/login.html`
-   - Email: `admin@local`
-   - Password: any non-empty value
+### Option 3: Python
+```bash
+python -m http.server 8000
+```
+
+Then open:
+- **Website**: `http://localhost:8000/public/index.html`
+- **Admin**: `http://localhost:8000/admin/login.html` (email: `admin@local`, password: any non-empty value)
 
 Mock mode persists data in localStorage, so you can add trips, posts, and manage bookings locally.
 
